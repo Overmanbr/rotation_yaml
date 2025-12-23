@@ -1,0 +1,78 @@
+# Example rotation file for Primate
+# Top-level keys are APL lists. "main" is required and is the entry point.
+
+sanitychecks:
+  - name: Rotation Stop (Disabled)
+    return: true
+    conditions:
+      - type: disabled
+
+  - name: Rotation Stop (Casting)
+    return: true
+    castingcheck: any
+
+cooldowns:
+  - name: Use Major Cooldown
+    spell_id: 123456
+    conditions:
+      - type: cds_enabled
+      - type: spell_cd
+        spell_id: 123456
+        op: "=="
+        value: 0
+
+builders:
+  - name: Builder Spell
+    spell_id: 234567
+    conditions:
+      - type: player_power
+        op: "<"
+        value: 70
+
+spenders:
+  - name: Spender Spell
+    spell_id: 345678
+    conditions:
+      aura_count:
+        - spell_id: 456789
+          op: ">="
+          value: 5
+
+utility:
+  - name: Interrupt Target
+    spell_id: 47528
+    rangecheck: target
+    conditions:
+      - type: target_interruptible
+      - type: target_cast_remains
+        op: "<="
+        value: 1.5
+
+main:
+  - name: Sanity Checks
+    run_apl: sanitychecks
+
+  - name: Cooldowns
+    call_apl: cooldowns
+    conditions:
+      - type: in_combat
+
+  - name: Utility
+    call_apl: utility
+
+  - name: Spend Resources
+    call_apl: spenders
+    conditions:
+      - type: in_melee_range
+
+  - name: Build Resources
+    call_apl: builders
+
+  - name: Fallback
+    spell_id: 654321
+    rangecheck: none
+    castingcheck: none
+    castremains: none
+    channelremains: none
+    hotkey: 1
+    modifier: 0
