@@ -100,7 +100,7 @@ conditions:
 - `target_hp`, `target_cast_id`, `target_cast_remains`, `target_interruptible`, `target_cast_important`
 
 **Mouseover**
-- `mouseoveR_exists` (note the capital `R`, matches the current parser)
+- `mouseover_exists`
 - `mouseover_lootable`, `mouseover_friendly`, `mouseover_enemy`, `mouseover_attackable`,
   `mouseover_dead`, `mouseover_alive`, `mouseover_combat`, `mouseover_being_tanked`
 - `mouseover_cast_id`, `mouseover_cast_remains`, `mouseover_interruptible`, `mouseover_cast_important`
